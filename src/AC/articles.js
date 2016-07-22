@@ -1,5 +1,6 @@
 import { DELETE_ARTICLE, LOAD_ALL_ARTICLES, SUCCESS, START } from '../constants'
 import $ from 'jquery'
+import history  from '../history'
 
 export function deleteArticle(id) {
     return {
@@ -7,6 +8,15 @@ export function deleteArticle(id) {
         payload: { id }
     }
 }
+
+/*
+export function loadAllArticles() {
+    return {
+        type: LOAD_ALL_ARTICLES,
+        callAPI: '/api/article'
+    }
+}
+*/
 
 export function loadAllArticles() {
     return (dispatch, getState) => {
@@ -20,6 +30,9 @@ export function loadAllArticles() {
                     type: LOAD_ALL_ARTICLES + SUCCESS,
                     response
                 }))
+                .done(response => {
+                    //history.push('/comments')
+                })
         }, 1000)
     }
 }
